@@ -2,14 +2,9 @@ import { createTheme } from "@mui/material";
 
 const theme = createTheme({
   palette: {
+    mode: "dark",
     background: {
       default: "#0D0D0D",
-    },
-    primary: {
-      main: "#0D0D0D",
-    },
-    secondary: {
-      main: "#32E5BB",
     },
   },
   typography: {
@@ -18,6 +13,15 @@ const theme = createTheme({
       color: "#fff",
     },
     fontSize: 16,
+  },
+  components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#0D0D0D",
+        },
+      },
+    },
   },
 });
 
