@@ -13,6 +13,15 @@ import MovieIcon from "@mui/icons-material/Movie";
 import { Link } from "react-router-dom";
 import "./Navigation.css";
 
+const pages = [
+  {
+    link: "popular",
+    title: "Popular",
+  },
+  { link: "top_rated", title: "Top Rated" },
+  { link: "upcoming", title: "Upcoming" },
+];
+
 function Navigation() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
@@ -53,33 +62,17 @@ function Navigation() {
               columnGap: "12px",
             }}
           >
-            <Button
-              component={Link}
-              to="movies/popular"
-              key="popular"
-              onClick={handleCloseNavMenu}
-              className="link"
-            >
-              Popular
-            </Button>
-            <Button
-              className="link"
-              component={Link}
-              to="movies/top_rated"
-              key="top_rated"
-              onClick={handleCloseNavMenu}
-            >
-              Top Rated
-            </Button>
-            <Button
-              component={Link}
-              to="movies/upcoming"
-              key="upcoming"
-              onClick={handleCloseNavMenu}
-              className="link"
-            >
-              Upcoming
-            </Button>
+            {pages.map((page) => (
+              <Button
+                component={Link}
+                to={`movies/${page.link}`}
+                key={page.link}
+                onClick={handleCloseNavMenu}
+                className="link"
+              >
+                {page.title}
+              </Button>
+            ))}
           </Box>
 
           <Box
@@ -116,30 +109,16 @@ function Navigation() {
                 backgroundColor: "#14141477",
               }}
             >
-              <MenuItem
-                component={Link}
-                to="movies/popular"
-                key="popular"
-                onClick={handleCloseNavMenu}
-              >
-                <Typography textAlign="center">Popular</Typography>
-              </MenuItem>
-              <MenuItem
-                component={Link}
-                to="movies/top_rated"
-                key="top_rated"
-                onClick={handleCloseNavMenu}
-              >
-                <Typography textAlign="center">Top Rated</Typography>
-              </MenuItem>
-              <MenuItem
-                component={Link}
-                to="movies/upcoming"
-                key="upcoming"
-                onClick={handleCloseNavMenu}
-              >
-                <Typography textAlign="center">Upcoming</Typography>
-              </MenuItem>
+              {pages.map((page) => (
+                <MenuItem
+                  component={Link}
+                  to={`movies/${page.link}`}
+                  key={page.link}
+                  onClick={handleCloseNavMenu}
+                >
+                  <Typography textAlign="center">{`${page.title}`}</Typography>
+                </MenuItem>
+              ))}
             </Menu>
           </Box>
 

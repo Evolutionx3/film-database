@@ -1,4 +1,4 @@
-import Navigation from "components/Header/Navigation";
+import Navigation from "components/Navigation/Navigation";
 
 const MainTemplate = ({ children }) => {
   return (

@@ -1,0 +1,56 @@
+.backgroundPoster{
+    height: 75vh;
+}
+
+.backgroundPoster__overlay {
+    position: absolute;
+    bottom: 0px;
+    height: 100%;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-image: linear-gradient(rgb(0,0,0,0) -80%, #0d0d0d 100%);
+    opacity: 1;
+    transition: opacity .3s;
+}   
+
+.hero__title {
+    font-weight: 700;
+    font-size: 3rem;
+    margin-bottom: 0.4rem;
+    text-align: left;
+    text-shadow: 0 1px 6px #00000029;
+}
+
+.hero__stats {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.hero__rating {
+    margin-right: 2rem;
+}
+
+.hero__description {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    text-align: left;
+    margin-bottom: 1.4rem;
+}
+
+.img__container {
+    width: 430px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img__container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 3px 20px #00000029;
+    outline: 1px solid #ffffff29;
+}

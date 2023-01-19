@@ -4,6 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import { Link } from "react-router-dom";
 import MovieList from "components/MovieList/MovieList";
+import MovieCarousel from "components/organisms/MovieCarousel/MovieCarousel";
 
 const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -18,46 +19,19 @@ const Home = () => {
 
   return (
     <>
-      <div className="poster">
-        <Carousel
-          showThumbs={false}
-          autoPlay={true}
-          transitionTime={3}
-          infiniteLoop={true}
-          showStatus={false}
-        >
-          {popularMovies.map((movie) => (
-            <Link
-              style={{ textDecoration: "none", color: "white" }}
-              to={`/movie/${movie.id}`}
-            >
-              <div className="posterImage">
-                <img
-                  alt={`${movie.original_title} poster`}
-                  src={`https://image.tmdb.org/t/p/original${
-                    movie && movie.backdrop_path
-                  }`}
-                />
-              </div>
-              <div className="posterImage__overlay">
-                <div className="posterImage__title">
-                  {movie ? movie.original_title : ""}
-                </div>
-                <div className="posterImage__runtime">
-                  {movie ? movie.release_date : ""}{" "}
-                  <span className="posterImage__rating">
-                    ⭐{movie ? movie.vote_average : ""}
-                  </span>
-                </div>
-                <div className="posterImage__description">
-                  {movie ? movie.overview : ""}
-                </div>
-              </div>
-            </Link>
-          ))}
-        </Carousel>
-        <MovieList />
-      </div>
+      <Carousel
+        showThumbs={false}
+        autoPlay={true}
+        transitionTime={4}
+        infiniteLoop={true}
+        showStatus={false}
+        showArrows={false}
+      >
+        {popularMovies.slice(0, 5).map((movie) => (
+          <MovieCarousel key={movie.id} movie={movie} />
+        ))}
+      </Carousel>
+      <MovieList />
     </>
   );
 };
