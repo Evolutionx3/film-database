@@ -8,6 +8,7 @@ import MovieCarousel from "components/organisms/MovieCarousel/MovieCarousel";
 
 const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);
+  const [genres, setGenres] = useState([]);
 
   useEffect(() => {
     fetch(
@@ -15,6 +16,14 @@ const Home = () => {
     )
       .then((res) => res.json())
       .then((data) => setPopularMovies(data.results));
+  }, []);
+
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_SECRET_KEY}&language=en_US`
+    )
+      .then((res) => res.json())
+      .then((data) => setGenres(data.genres));
   }, []);
 
   return (
@@ -28,7 +37,7 @@ const Home = () => {
         showArrows={false}
       >
         {popularMovies.slice(0, 5).map((movie) => (
-          <MovieCarousel key={movie.id} movie={movie} />
+          <MovieCarousel key={movie.id} movie={movie} genres={genres} />
         ))}
       </Carousel>
       <MovieList />

@@ -28,10 +28,6 @@
     text-align: left;
 }
 
-.hero__rating {
-    margin-right: 2rem;
-}
-
 .hero__description {
     font-size: 1.1rem;
     line-height: 1.5;

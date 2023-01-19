@@ -1,20 +1,29 @@
-import { Button, Container, Grid, Typography } from "@mui/material";
+import {
+  Button,
+  Chip,
+  Container,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import React from "react";
 import "./MovieCarousel.css";
 
-const MovieCarousel = ({ movie }) => {
+const MovieCarousel = ({ movie, genres }) => {
   const {
     original_title,
     backdrop_path,
-    release_date,
     vote_average,
     overview,
     poster_path,
     id,
+    genre_ids,
   } = movie;
+
   return (
     <>
+      {console.log(genre_ids, genres)}
       <div className="backgroundPoster">
         <img
           alt={`${original_title} poster`}
@@ -43,7 +52,13 @@ const MovieCarousel = ({ movie }) => {
               </Typography>
               <Typography variant="subtitle1" className="hero__stats">
                 <span className="hero__rating">⭐{vote_average}</span>
-                {release_date}{" "}
+                <Stack direction="row" spacing={1}>
+                  {genres.map((genre) =>
+                    genre_ids.map((id) =>
+                      genre.id === id ? <Chip label={genre.name} /> : ""
+                    )
+                  )}
+                </Stack>
               </Typography>
               <Typography variant="body1" className="hero__description">
                 {`${overview.slice(0, 200)}...`}
