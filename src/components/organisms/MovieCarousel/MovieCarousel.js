@@ -21,9 +21,10 @@ const MovieCarousel = ({ movie, genres }) => {
     genre_ids,
   } = movie;
 
+  const genreNames = genres.filter((genre) => genre_ids.includes(genre.id));
+
   return (
     <>
-      {console.log(genre_ids, genres)}
       <div className="backgroundPoster">
         <img
           alt={`${original_title} poster`}
@@ -53,11 +54,9 @@ const MovieCarousel = ({ movie, genres }) => {
               <Typography variant="subtitle1" className="hero__stats">
                 <span className="hero__rating">⭐{vote_average}</span>
                 <Stack direction="row" spacing={1}>
-                  {genres.map((genre) =>
-                    genre_ids.map((id) =>
-                      genre.id === id ? <Chip label={genre.name} /> : ""
-                    )
-                  )}
+                  {genreNames.map((genre) => (
+                    <Chip label={genre.name} />
+                  ))}
                 </Stack>
               </Typography>
               <Typography variant="body1" className="hero__description">

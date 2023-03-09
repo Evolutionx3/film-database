@@ -1,0 +1,7 @@
+.cards__container > div > ul  {
+gap: 1.5rem;
+}
+
+.carousel-container {
+    width: 100%;
+}

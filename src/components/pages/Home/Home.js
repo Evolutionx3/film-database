@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-import { Link } from "react-router-dom";
-import MovieList from "components/MovieList/MovieList";
 import MovieCarousel from "components/organisms/MovieCarousel/MovieCarousel";
+import MovieSlider from "components/MovieCarousel/MovieSlider";
 
 const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -31,7 +30,7 @@ const Home = () => {
       <Carousel
         showThumbs={false}
         autoPlay={true}
-        transitionTime={4}
+        transitionTime={5}
         infiniteLoop={true}
         showStatus={false}
         showArrows={false}
@@ -40,7 +39,9 @@ const Home = () => {
           <MovieCarousel key={movie.id} movie={movie} genres={genres} />
         ))}
       </Carousel>
-      <MovieList />
+      <MovieSlider type="popular" />
+      <MovieSlider type="top_rated" />
+      <MovieSlider type="upcoming" />
     </>
   );
 };
