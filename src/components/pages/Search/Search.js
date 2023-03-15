@@ -1,8 +1,5 @@
-import React from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import { useEffect, useState } from "react";
-import { SearchBar, SearchIconWrapper, StyledInputBase } from "./Search.styled";
-import "./Search.css";
+import React, { useEffect, useState } from "react";
+import SearchComponent from "components/molecules/SearchBar/SearchBar";
 import { Container } from "@mui/system";
 import { Typography } from "@mui/material";
 import PaginationComponent from "components/molecules/Pagination/Pagination";
@@ -54,16 +51,11 @@ const Search = () => {
   return (
     <Container maxWidth="xl" sx={{ paddingY: "3rem" }}>
       <Stack direction="row" width="100%" spacing={1}>
-        <SearchBar>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            onChange={(e) => setSearchText(e.target.value)}
-            placeholder="Type title..."
-            inputProps={{ "aria-label": "title" }}
-          />
-        </SearchBar>
+        <SearchComponent
+          searchText={searchText}
+          setSearchText={setSearchText}
+          placeholder="Type tittle..."
+        ></SearchComponent>
       </Stack>
       {isLoading && <Typography className="loading">Loading...</Typography>}
       {!isLoading && searched && content.length === 0 ? (
