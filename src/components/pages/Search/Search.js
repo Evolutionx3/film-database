@@ -4,17 +4,20 @@ import { useEffect, useState } from "react";
 import { SearchBar, SearchIconWrapper, StyledInputBase } from "./Search.styled";
 import "./Search.css";
 import { Container } from "@mui/system";
-import { Button, Pagination } from "@mui/material";
+import { Button, Pagination, Typography } from "@mui/material";
 import { Stack } from "@mui/material";
 import Cards from "components/Card/Card";
 
 const Search = () => {
   const [searchText, setSearchText] = useState("");
+  const [searched, setSearched] = useState(false);
   const [page, setPage] = useState(1);
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const getData = () => {
+    setIsLoading(true);
     fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_SECRET_KEY}&language=en_US&page=${page}&query=${searchText}&include_adult=false`
     )
@@ -26,7 +29,9 @@ const Search = () => {
         } else {
           setContent(data.results);
           setNumOfPages(data.total_pages);
+          setSearched(true);
         }
+        setIsLoading(false);
       });
   };
 
@@ -57,15 +62,17 @@ const Search = () => {
           Search
         </Button>
       </Stack>
-      {content.length === 0 && <div>No movies found</div>}
-      {content.length > 0 && (
+      {isLoading && <Typography className="loading">Loading...</Typography>}
+      {!isLoading && searched && content.length === 0 ? (
+        <div>No movies found</div>
+      ) : (
         <div className="list__cards">
           {content.map((movie) => (
             <Cards movie={movie} key={movie.id} />
           ))}
         </div>
       )}
-      {numOfPages > 1 && (
+      {!isLoading && numOfPages > 1 && (
         <Stack alignItems="center">
           <Pagination
             onChange={(e) => handlePageChange(e.target.textContent)}
