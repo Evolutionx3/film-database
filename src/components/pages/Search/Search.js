@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { SearchBar, SearchIconWrapper, StyledInputBase } from "./Search.styled";
 import "./Search.css";
 import { Container } from "@mui/system";
-import { Button, Pagination, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
+import PaginationComponent from "components/molecules/Pagination/Pagination";
 import { Stack } from "@mui/material";
 import Cards from "components/Card/Card";
 import { useDebounce } from "components/Hooks/useDebounce";
@@ -76,12 +77,11 @@ const Search = () => {
       )}
       {!isLoading && numOfPages > 1 && (
         <Stack alignItems="center">
-          <Pagination
-            onChange={(e) => handlePageChange(e.target.textContent)}
-            count={numOfPages}
-            hideNextButton
-            hidePrevButton
-          ></Pagination>
+          <PaginationComponent
+            numOfPages={numOfPages}
+            onPageChange={handlePageChange}
+            page={page}
+          ></PaginationComponent>
         </Stack>
       )}
     </Container>
