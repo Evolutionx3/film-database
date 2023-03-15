@@ -12,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MovieIcon from "@mui/icons-material/Movie";
 import { Link } from "react-router-dom";
 import "./Navigation.css";
+import { Stack } from "@mui/system";
 
 const pages = [
   {
@@ -20,6 +21,7 @@ const pages = [
   },
   { link: "top_rated", title: "Top Rated" },
   { link: "upcoming", title: "Upcoming" },
+  { link: "search", title: "Search" },
 ];
 
 function Navigation() {
@@ -55,25 +57,29 @@ function Navigation() {
             Film DB
           </Typography>
 
-          <Box
+          <Stack
+            direction="row"
+            justifyContent="space-between"
             sx={{
               flexGrow: 1,
               display: { xs: "none", md: "flex" },
               columnGap: "12px",
             }}
           >
-            {pages.map((page) => (
-              <Button
-                component={Link}
-                to={`movies/${page.link}`}
-                key={page.link}
-                onClick={handleCloseNavMenu}
-                className="link"
-              >
-                {page.title}
-              </Button>
-            ))}
-          </Box>
+            <Stack direction="row">
+              {pages.map((page) => (
+                <Button
+                  component={Link}
+                  to={`/movies/${page.link}`}
+                  key={page.link}
+                  onClick={handleCloseNavMenu}
+                  className="link"
+                >
+                  {page.title}
+                </Button>
+              ))}
+            </Stack>
+          </Stack>
 
           <Box
             sx={{
@@ -112,7 +118,7 @@ function Navigation() {
               {pages.map((page) => (
                 <MenuItem
                   component={Link}
-                  to={`movies/${page.link}`}
+                  to={`/movies/${page.link}`}
                   key={page.link}
                   onClick={handleCloseNavMenu}
                 >

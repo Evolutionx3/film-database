@@ -47,7 +47,7 @@ const MovieList = () => {
           alignItems="center"
         >
           <h2 className="list__title">
-            {(type ? type : "POPULAR").toUpperCase()}
+            {(type ? type : "POPULAR").toUpperCase().replace(/_/g, " ")}
           </h2>
         </Stack>
         <div className="list__cards">

@@ -51,7 +51,9 @@ const MovieSlider = ({ type }) => {
           justifyContent="space-between"
           alignItems="center"
         >
-          <h2 className="list__title">{type.toUpperCase()}</h2>
+          <h2 className="list__title">
+            {type.toUpperCase().replace(/_/g, " ")}
+          </h2>
           <Button
             component={Link}
             to={`movies/${type}`}
