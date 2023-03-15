@@ -7,6 +7,7 @@ import { Container } from "@mui/system";
 import { Button, Pagination, Typography } from "@mui/material";
 import { Stack } from "@mui/material";
 import Cards from "components/Card/Card";
+import { useDebounce } from "components/Hooks/useDebounce";
 
 const Search = () => {
   const [searchText, setSearchText] = useState("");
@@ -15,6 +16,8 @@ const Search = () => {
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
   const [isLoading, setIsLoading] = useState(false);
+
+  const debouncedSearchText = useDebounce(searchText, 500);
 
   const getData = () => {
     setIsLoading(true);
@@ -37,8 +40,10 @@ const Search = () => {
 
   useEffect(() => {
     window.scroll(0, 0);
-    getData();
-  }, [page]);
+    if (debouncedSearchText) {
+      getData();
+    }
+  }, [page, debouncedSearchText]);
 
   const handlePageChange = (page) => {
     setPage(page);
@@ -58,9 +63,6 @@ const Search = () => {
             inputProps={{ "aria-label": "title" }}
           />
         </SearchBar>
-        <Button className="link" onClick={getData}>
-          Search
-        </Button>
       </Stack>
       {isLoading && <Typography className="loading">Loading...</Typography>}
       {!isLoading && searched && content.length === 0 ? (
