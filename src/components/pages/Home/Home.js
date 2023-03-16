@@ -28,7 +28,7 @@ const Home = () => {
 
     fetchPopularMovies();
     fetchGenres();
-  }, []);
+  }, [endpoints.popularMovies, endpoints.genres]);
 
   return (
     <>

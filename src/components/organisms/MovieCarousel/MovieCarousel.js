@@ -29,6 +29,7 @@ const MovieCarousel = ({ movie, genres }) => {
         <img
           alt={`${original_title} poster`}
           src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
+          loading="lazy"
         />
       </div>
       <div className="backgroundPoster__overlay">
@@ -55,7 +56,7 @@ const MovieCarousel = ({ movie, genres }) => {
                 <span className="hero__rating">⭐{vote_average}</span>
                 <Stack direction="row" spacing={1}>
                   {genreNames.map((genre) => (
-                    <Chip label={genre.name} />
+                    <Chip key={genre.id} label={genre.name} />
                   ))}
                 </Stack>
               </Typography>
@@ -86,6 +87,7 @@ const MovieCarousel = ({ movie, genres }) => {
                 <img
                   src={`https://image.tmdb.org/t/p/original${poster_path}`}
                   alt={`${original_title} poster`}
+                  loading="lazy"
                 />
               </Container>
             </Grid>

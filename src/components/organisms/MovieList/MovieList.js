@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Cards from "components/molecules/Card/Card";
 import "./MovieList.css";
 import { useParams } from "react-router-dom";
@@ -12,31 +12,46 @@ const MovieList = () => {
   const [page, setPage] = useState(1);
   const [numOfPages, setNumOfPages] = useState();
 
-  useEffect(() => {
-    getData();
-  }, []);
-  useEffect(() => {
-    window.scroll(0, 0);
-    getData();
-  }, [type, page]);
+  const MOVIE_DB_API = "https://api.themoviedb.org/3/movie/";
+  const DEFAULT_TYPE = "popular";
+  const DEFAULT_LANG = "en_US";
 
-  const getData = () => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${type ? type : "popular"}?api_key=${
-        process.env.REACT_APP_SECRET_KEY
-      }&language=en_US&page=${page}`
-    )
+  const url = `${MOVIE_DB_API}${type || DEFAULT_TYPE}?api_key=${
+    process.env.REACT_APP_SECRET_KEY
+  }&language=${DEFAULT_LANG}&page=${page}`;
+
+  const getData = useCallback(() => {
+    fetch(url)
       .then((res) => res.json())
       .then((data) => {
         setMovieList(data.results);
         setNumOfPages(data.total_pages);
       });
-  };
+  }, [url]);
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
+
+  useEffect(() => {
+    window.scroll(0, 0);
+    getData();
+  }, [type, page, getData]);
 
   const handlePageChange = (page) => {
-    setPage(page);
     window.scroll(0, 0);
+    setPage(page);
   };
+
+  const CardsList = React.memo(({ movieList }) => {
+    return (
+      <div className="list__cards">
+        {movieList.map((movie) => (
+          <Cards movie={movie} key={movie.id} />
+        ))}
+      </div>
+    );
+  });
 
   return (
     <Container maxWidth="xl">
@@ -50,11 +65,7 @@ const MovieList = () => {
             {(type ? type : "POPULAR").toUpperCase().replace(/_/g, " ")}
           </h2>
         </Stack>
-        <div className="list__cards">
-          {movieList.map((movie) => (
-            <Cards movie={movie} key={movie.id} />
-          ))}
-        </div>
+        <CardsList movieList={movieList} />
       </div>
       {numOfPages > 1 && (
         <Stack alignItems="center">
