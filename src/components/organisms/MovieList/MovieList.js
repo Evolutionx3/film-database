@@ -4,7 +4,8 @@ import "./MovieList.css";
 import { useParams } from "react-router-dom";
 import { Container } from "@mui/system";
 import "react-multi-carousel/lib/styles.css";
-import { Pagination, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
+import PaginationComponent from "components/molecules/Pagination/Pagination";
 
 const MovieList = () => {
   const [movieList, setMovieList] = useState([]);
@@ -20,23 +21,25 @@ const MovieList = () => {
     process.env.REACT_APP_SECRET_KEY
   }&language=${DEFAULT_LANG}&page=${page}`;
 
-  const getData = useCallback(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setMovieList(data.results);
-        setNumOfPages(data.total_pages);
-      });
+  const getData = useCallback(async () => {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setMovieList(data.results);
+      setNumOfPages(data.total_pages);
+    } catch (error) {
+      console.error(error);
+    }
   }, [url]);
-
-  useEffect(() => {
-    getData();
-  }, [getData]);
 
   useEffect(() => {
     window.scroll(0, 0);
     getData();
   }, [type, page, getData]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [type]);
 
   const handlePageChange = (page) => {
     window.scroll(0, 0);
@@ -69,12 +72,11 @@ const MovieList = () => {
       </div>
       {numOfPages > 1 && (
         <Stack alignItems="center">
-          <Pagination
-            onChange={(e) => handlePageChange(e.target.textContent)}
-            count={numOfPages}
-            hideNextButton
-            hidePrevButton
-          ></Pagination>
+          <PaginationComponent
+            numOfPages={numOfPages}
+            onPageChange={handlePageChange}
+            page={page}
+          ></PaginationComponent>
         </Stack>
       )}
     </Container>
