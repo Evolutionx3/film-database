@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Cards from "components/Card/Card";
+import Cards from "components/molecules/Card/Card";
 import "./MovieList.css";
 import { useParams } from "react-router-dom";
 import { Container } from "@mui/system";

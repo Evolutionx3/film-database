@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import SearchComponent from "components/molecules/SearchBar/SearchBar";
 import { Container } from "@mui/system";
 import { Typography } from "@mui/material";
 import PaginationComponent from "components/molecules/Pagination/Pagination";
 import { Stack } from "@mui/material";
-import Cards from "components/Card/Card";
+import Cards from "components/molecules/Card/Card";
 import { useDebounce } from "components/Hooks/useDebounce";
 
 const Search = () => {
@@ -17,31 +17,34 @@ const Search = () => {
 
   const debouncedSearchText = useDebounce(searchText, 500);
 
-  const getData = () => {
+  const getData = useCallback(async () => {
     setIsLoading(true);
-    fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_SECRET_KEY}&language=en_US&page=${page}&query=${searchText}&include_adult=false`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.total_results === 0) {
-          setContent([]);
-          setNumOfPages(0);
-        } else {
-          setContent(data.results);
-          setNumOfPages(data.total_pages);
-          setSearched(true);
-        }
-        setIsLoading(false);
-      });
-  };
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_SECRET_KEY}&language=en_US&page=${page}&query=${searchText}&include_adult=false`
+      );
+      const data = await response.json();
+      if (data.total_results === 0) {
+        setContent([]);
+        setNumOfPages(0);
+      } else {
+        setContent(data.results);
+        setNumOfPages(data.total_pages);
+        setSearched(true);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [page, searchText]);
 
   useEffect(() => {
     window.scroll(0, 0);
     if (debouncedSearchText) {
       getData();
     }
-  }, [page, debouncedSearchText]);
+  }, [page, searchText, debouncedSearchText, getData]);
 
   const handlePageChange = (page) => {
     setPage(page);
