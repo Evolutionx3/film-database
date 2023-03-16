@@ -1,26 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "./MovieDetail.css";
 import { useParams } from "react-router-dom";
 import { Container } from "@mui/system";
 import { Chip, Link, Stack } from "@mui/material";
-import Button from "@mui/material";
 
 const MovieDetail = () => {
   const [currentMovieDetail, setMovie] = useState();
   const { id } = useParams();
 
+  const getData = useCallback(async () => {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_SECRET_KEY}&language=en-US`
+    );
+    const data = await response.json();
+    setMovie(data);
+    window.scrollTo(0, 0);
+  }, [id]);
+
   useEffect(() => {
     getData();
-    window.scrollTo(0, 0);
-  }, []);
-
-  const getData = () => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_SECRET_KEY}&language=en-US`
-    )
-      .then((res) => res.json())
-      .then((data) => setMovie(data));
-  };
+  }, [getData]);
 
   return (
     <Container
@@ -32,7 +31,6 @@ const MovieDetail = () => {
         alignItems: "center",
       }}
     >
-      {console.log(currentMovieDetail)}
       <div className="movie__intro">
         <img
           alt={`${
@@ -140,7 +138,8 @@ const MovieDetail = () => {
                 {company.logo_path && (
                   <span className="productionCompanyImage">
                     <img
-                      className="movie__productionComapany"
+                      alt={`${company.logo_path} logo`}
+                      className="movie__productionCompany"
                       src={
                         "https://image.tmdb.org/t/p/original" +
                         company.logo_path
