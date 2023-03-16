@@ -1,28 +1,33 @@
 import React, { useEffect, useState } from "react";
-import "./Home.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import MovieCarousel from "components/organisms/MovieCarousel/MovieCarousel";
-import MovieSlider from "components/MovieCarousel/MovieSlider";
+import MovieSlider from "components/organisms/MovieSlider/MovieSlider";
 
 const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);
   const [genres, setGenres] = useState([]);
 
-  useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_SECRET_KEY}&language=en_US`
-    )
-      .then((res) => res.json())
-      .then((data) => setPopularMovies(data.results));
-  }, []);
+  const endpoints = {
+    popularMovies: `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_SECRET_KEY}&language=en_US`,
+    genres: `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_SECRET_KEY}&language=en_US`,
+  };
 
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_SECRET_KEY}&language=en_US`
-    )
-      .then((res) => res.json())
-      .then((data) => setGenres(data.genres));
+    const fetchPopularMovies = async () => {
+      const response = await fetch(endpoints.popularMovies);
+      const { results } = await response.json();
+      setPopularMovies(results);
+    };
+
+    const fetchGenres = async () => {
+      const response = await fetch(endpoints.genres);
+      const { genres } = await response.json();
+      setGenres(genres);
+    };
+
+    fetchPopularMovies();
+    fetchGenres();
   }, []);
 
   return (

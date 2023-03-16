@@ -1,5 +1,5 @@
-import Navigation from "components/Navigation/Navigation";
-import Footer from "components/Footer/Footer";
+import Navigation from "components/organisms/Navigation/Navigation";
+import Footer from "components/organisms/Footer/Footer";
 
 const MainTemplate = ({ children }) => {
   return (

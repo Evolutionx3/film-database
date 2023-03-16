@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "components/pages/Home/Home";
-import MovieList from "components/MovieList/MovieList";
+import MovieList from "components/organisms/MovieList/MovieList";
 import Search from "components/pages/Search/Search";
 import MovieDetail from "components/pages/MovieDetail/MovieDetail";
 import MainTemplate from "components/templates/MainTemplate/MainTemplate";
