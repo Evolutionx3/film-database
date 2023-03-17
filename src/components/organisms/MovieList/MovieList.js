@@ -12,6 +12,7 @@ const MovieList = () => {
   const { type } = useParams();
   const [page, setPage] = useState(1);
   const [numOfPages, setNumOfPages] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const MOVIE_DB_API = "https://api.themoviedb.org/3/movie/";
   const DEFAULT_TYPE = "popular";
@@ -22,6 +23,7 @@ const MovieList = () => {
   }&language=${DEFAULT_LANG}&page=${page}`;
 
   const getData = useCallback(async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -29,13 +31,15 @@ const MovieList = () => {
       setNumOfPages(data.total_pages);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   }, [url]);
 
   useEffect(() => {
     window.scroll(0, 0);
     getData();
-  }, [type, page, getData]);
+  }, [page, getData]);
 
   useEffect(() => {
     setPage(1);
@@ -68,16 +72,19 @@ const MovieList = () => {
             {(type ? type : "POPULAR").toUpperCase().replace(/_/g, " ")}
           </h2>
         </Stack>
-        <CardsList movieList={movieList} />
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <CardsList movieList={movieList} />
+        )}
       </div>
+
       {numOfPages > 1 && (
-        <Stack alignItems="center">
-          <PaginationComponent
-            numOfPages={numOfPages}
-            onPageChange={handlePageChange}
-            page={page}
-          ></PaginationComponent>
-        </Stack>
+        <PaginationComponent
+          numOfPages={numOfPages}
+          onPageChange={handlePageChange}
+          page={page}
+        ></PaginationComponent>
       )}
     </Container>
   );

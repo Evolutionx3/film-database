@@ -1,18 +1,20 @@
 import React from "react";
-import { Pagination } from "@mui/material";
+import { Pagination, Stack } from "@mui/material";
 
 const PaginationComponent = ({ page, numOfPages, onPageChange }) => {
   const handlePageChange = (event, value) => {
     onPageChange(value);
   };
   return (
-    <Pagination
-      count={numOfPages}
-      page={page}
-      onChange={handlePageChange}
-      hideNextButton
-      hidePrevButton
-    ></Pagination>
+    <Stack alignItems="center">
+      <Pagination
+        count={numOfPages}
+        page={page}
+        onChange={handlePageChange}
+        hideNextButton
+        hidePrevButton
+      />
+    </Stack>
   );
 };
 
