@@ -6,6 +6,7 @@ import PaginationComponent from "components/molecules/Pagination/Pagination";
 import { Stack } from "@mui/material";
 import Cards from "components/molecules/Card/Card";
 import { useDebounce } from "components/Hooks/useDebounce";
+import { DEFAULT_LANG } from "components/API/api";
 
 const Search = () => {
   const [searchText, setSearchText] = useState("");
@@ -21,7 +22,7 @@ const Search = () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_SECRET_KEY}&language=en_US&page=${page}&query=${searchText}&include_adult=false`
+        `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_SECRET_KEY}&language=${DEFAULT_LANG}&page=${page}&query=${searchText}&include_adult=false`
       );
       const data = await response.json();
       if (data.total_results === 0) {

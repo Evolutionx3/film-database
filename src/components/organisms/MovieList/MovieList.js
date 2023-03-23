@@ -6,6 +6,7 @@ import { Container } from "@mui/system";
 import "react-multi-carousel/lib/styles.css";
 import { Stack } from "@mui/material";
 import PaginationComponent from "components/molecules/Pagination/Pagination";
+import { MOVIE_DB_API, DEFAULT_TYPE, DEFAULT_LANG } from "components/API/api";
 
 const MovieList = () => {
   const [movieList, setMovieList] = useState([]);
@@ -13,10 +14,6 @@ const MovieList = () => {
   const [page, setPage] = useState(1);
   const [numOfPages, setNumOfPages] = useState();
   const [isLoading, setIsLoading] = useState(false);
-
-  const MOVIE_DB_API = "https://api.themoviedb.org/3/movie/";
-  const DEFAULT_TYPE = "popular";
-  const DEFAULT_LANG = "en_US";
 
   const url = `${MOVIE_DB_API}${type || DEFAULT_TYPE}?api_key=${
     process.env.REACT_APP_SECRET_KEY

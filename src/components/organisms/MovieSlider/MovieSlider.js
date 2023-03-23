@@ -8,17 +8,20 @@ import "react-multi-carousel/lib/styles.css";
 import { Stack } from "@mui/material";
 import Button from "@mui/material/Button";
 import { responsive } from "./responsive";
+import { MOVIE_DB_API, DEFAULT_TYPE, DEFAULT_LANG } from "components/API/api";
 
 const MovieSlider = ({ type }) => {
   const [movieList, setMovieList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const url = `${MOVIE_DB_API}${type || DEFAULT_TYPE}?api_key=${
+    process.env.REACT_APP_SECRET_KEY
+  }&language=${DEFAULT_LANG}`;
+
   const getData = useCallback(async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${type}?api_key=0500bb9c40a3204d00609ab97c4ad192&language=en_US`
-      );
+      const response = await fetch(url);
       const data = await response.json();
       setMovieList(data.results);
     } catch (error) {
@@ -26,7 +29,7 @@ const MovieSlider = ({ type }) => {
     } finally {
       setIsLoading(false);
     }
-  }, [type]);
+  }, [url]);
 
   useEffect(() => {
     getData();
