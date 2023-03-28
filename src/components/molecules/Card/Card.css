@@ -13,3 +13,15 @@
 .card__rating {
     float: right;
 }
+
+@media only screen and (max-width: 1366px) {
+    .card__title {
+        height: 72px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .card__title {
+        font-size: 0.9rem;
+    }
+}

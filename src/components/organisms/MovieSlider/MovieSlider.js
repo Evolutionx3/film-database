@@ -69,7 +69,7 @@ const MovieSlider = ({ type }) => {
                 responsive={responsive}
                 centerMode
                 ssr={true} // means to render carousel on server-side.
-                infinite={true}
+                infinite={false}
                 keyBoardControl={true}
                 transitionDuration={500}
                 containerClass="carousel-container"

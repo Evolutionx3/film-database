@@ -39,7 +39,7 @@ const MovieCarousel = ({ movie, genres }) => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            alignItems: "flex-start",
+            alignItems: "center",
           }}
         >
           <Grid
@@ -47,9 +47,14 @@ const MovieCarousel = ({ movie, genres }) => {
             direction="row"
             justifyContent="center"
             alignItems="center"
+            spacing={1}
           >
-            <Grid item md={6} sx={{ textAlign: "left" }}>
-              <Typography variant="h2" className="hero__title">
+            <Grid item xs={12} sm={6} sx={{ textAlign: "left" }}>
+              <Typography
+                variant="h2"
+                sx={{ fontSize: { xs: "2.5rem", sm: "2rem", md: "3rem" } }}
+                className="hero__title"
+              >
                 {original_title}
               </Typography>
               <Typography variant="subtitle1" className="hero__stats">
@@ -60,7 +65,11 @@ const MovieCarousel = ({ movie, genres }) => {
                   ))}
                 </Stack>
               </Typography>
-              <Typography variant="body1" className="hero__description">
+              <Typography
+                variant="body1"
+                sx={{ fontSize: { sm: "1rem", md: "1.1rem" } }}
+                className="hero__description"
+              >
                 {`${overview.slice(0, 200)}...`}
               </Typography>
               <Button
@@ -72,6 +81,7 @@ const MovieCarousel = ({ movie, genres }) => {
                   backgroundColor: "#F5C518",
                   boxShadow: "0 3px 15px #00000029",
                   color: "#0D0D0D",
+                  fontSize: { sm: "1rem", md: "1.1rem" },
                   fontWeight: 700,
                   textTransform: "none",
                 }}
@@ -79,10 +89,16 @@ const MovieCarousel = ({ movie, genres }) => {
                 See more
               </Button>
             </Grid>
-            <Grid item md={6}>
+            <Grid item xs={12} sm={6}>
               <Container
                 className="img__container"
-                sx={{ md: { height: "600px" } }}
+                sx={{
+                  display: { xs: "none", sm: "flex" },
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: { md: "600px" },
+                  width: { sm: "300px", md: "430px" },
+                }}
               >
                 <img
                   src={`https://image.tmdb.org/t/p/original${poster_path}`}
