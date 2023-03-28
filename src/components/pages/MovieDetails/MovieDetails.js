@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Container } from "@mui/system";
 import { Link, Stack } from "@mui/material";
 import { MOVIE_DB_API } from "components/API/api";
-import MovieDetail from "components/MovieDetail/MovieDetail";
+import MovieDetail from "components/organisms/MovieDetail/MovieDetail";
 
 const MovieDetails = () => {
   const [currentMovieDetail, setMovie] = useState();
