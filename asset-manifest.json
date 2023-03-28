@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/film-database/static/css/main.37a71922.css",
-    "main.js": "/film-database/static/js/main.972fc5be.js",
+    "main.js": "/film-database/static/js/main.805ca33b.js",
     "static/media/revicons.eot": "/film-database/static/media/revicons.a77de540a38981833f9e.eot",
     "static/media/revicons.ttf": "/film-database/static/media/revicons.57fd05d4ae650374c8de.ttf",
     "static/media/revicons.woff": "/film-database/static/media/revicons.e8746a624ed098489406.woff",
     "index.html": "/film-database/index.html",
     "main.37a71922.css.map": "/film-database/static/css/main.37a71922.css.map",
-    "main.972fc5be.js.map": "/film-database/static/js/main.972fc5be.js.map"
+    "main.805ca33b.js.map": "/film-database/static/js/main.805ca33b.js.map"
   },
   "entrypoints": [
     "static/css/main.37a71922.css",
-    "static/js/main.972fc5be.js"
+    "static/js/main.805ca33b.js"
   ]
 }
