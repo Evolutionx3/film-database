@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/evolutionx3.github.io/film-database/static/css/main.a95ab17f.css",
+    "main.js": "/evolutionx3.github.io/film-database/static/js/main.972fc5be.js",
+    "static/media/revicons.eot": "/evolutionx3.github.io/film-database/static/media/revicons.a77de540a38981833f9e.eot",
+    "static/media/revicons.ttf": "/evolutionx3.github.io/film-database/static/media/revicons.57fd05d4ae650374c8de.ttf",
+    "static/media/revicons.woff": "/evolutionx3.github.io/film-database/static/media/revicons.e8746a624ed098489406.woff",
+    "index.html": "/evolutionx3.github.io/film-database/index.html",
+    "main.a95ab17f.css.map": "/evolutionx3.github.io/film-database/static/css/main.a95ab17f.css.map",
+    "main.972fc5be.js.map": "/evolutionx3.github.io/film-database/static/js/main.972fc5be.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a95ab17f.css",
+    "static/js/main.972fc5be.js"
+  ]
+}
