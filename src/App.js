@@ -9,11 +9,11 @@ function App() {
   return (
     <MainTemplate>
       <Routes>
-        <Route index element={<Home />} />
-        <Route path="movie/:id" element={<MovieDetails />} />
-        <Route path="movies/search" element={<Search />} />
-        <Route path="movies/:type" element={<MovieList />} />
-        <Route path="/*" element={<h1>Error page</h1>} />
+        <Route path="film-database" index element={<Home />} />
+        <Route path="film-database/movie/:id" element={<MovieDetails />} />
+        <Route path="film-database/movies/search" element={<Search />} />
+        <Route path="film-database/movies/:type" element={<MovieList />} />
+        <Route path="film-database/*" element={<h1>Error page</h1>} />
       </Routes>
     </MainTemplate>
   );

@@ -12,7 +12,7 @@ const Cards = ({ movie }) => {
   return (
     <>
       <Link
-        to={`/movie/${movie.id}`}
+        to={`/film-database/movie/${movie.id}`}
         style={{ textDecoration: "none", color: "white" }}
         key={movie.id}
       >

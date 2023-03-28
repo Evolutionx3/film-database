@@ -12,7 +12,7 @@ const NavDesktop = () => {
         variant="h6"
         noWrap
         component={Link}
-        to="/"
+        to="/film-database"
         sx={{
           mr: 4,
           display: { xs: "none", md: "flex" },
@@ -39,7 +39,7 @@ const NavDesktop = () => {
           {pages.map((page) => (
             <Button
               component={Link}
-              to={`/movies/${page.link}`}
+              to={`film-database/movies/${page.link}`}
               key={page.link}
               className="link"
             >

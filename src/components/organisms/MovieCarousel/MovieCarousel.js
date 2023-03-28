@@ -74,7 +74,7 @@ const MovieCarousel = ({ movie, genres }) => {
               </Typography>
               <Button
                 component={Link}
-                to={`/movie/${id}`}
+                to={`movie/${id}`}
                 variant="contained"
                 size="large"
                 sx={{

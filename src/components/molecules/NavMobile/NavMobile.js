@@ -59,7 +59,7 @@ const NavMobile = () => {
           {pages.map((page) => (
             <MenuItem
               component={Link}
-              to={`/movies/${page.link}`}
+              to={`film-database/movies/${page.link}`}
               key={page.link}
               onClick={handleCloseNavMenu}
             >
@@ -73,7 +73,7 @@ const NavMobile = () => {
         variant="h5"
         noWrap
         component={Link}
-        to="/"
+        to="/film-database"
         sx={{
           mr: 2,
           display: { xs: "flex", md: "none" },
